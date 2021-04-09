@@ -17,20 +17,27 @@ class App extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			width: 1200,
-			height: 600,
-			frameRate: 10
+			frameRate: 10,
+			openKeys: ["Sorting"],
+			subMenuTitle: "",
+			menuItemTitle: "",
 		};
 	}
 
 	constructCanvasSettings(){
 		let settings = {
-			width: this.state.width,
-			height: this.state.height,
 			frameRate: this.state.frameRate
 		};
 
 		return settings;
+	}
+
+	handleMenuItemSelected(key){
+		this.setState({menuItemTitle: key});
+	}
+
+	handleSubMenuSelected(key){
+		this.setState({subMenuTitle: key, openKeys: [key], menuItemTitle: ""});
 	}
 
   render(){
@@ -48,23 +55,25 @@ class App extends React.Component{
 					<Sider width={200} className="site-layout-background">
 						<Menu
 						mode="inline"
-						defaultSelectedKeys={['1']}
-						defaultOpenKeys={['sub1']}
+						openKeys={this.state.openKeys}
+						defaultOpenKeys={this.state.openKeys}
 						style={{ height: '100%', borderRight: 0 }}
+						onSelect={(e) => this.handleMenuItemSelected(e.key)}
+						// onOpenChange={(openKeys) => this.handleSubMenuSelected(openKeys)}
 						>
-						<SubMenu key="sub1"  title="Sorting">
-							<Menu.Item key="1"><Link to="/bubblesort">Bubble Sort</Link></Menu.Item>
-							<Menu.Item key="2"><Link to="/quicksort">Quick Sort</Link></Menu.Item>
+						<SubMenu key="Sorting"  title="Sorting" onTitleClick={(e) => this.handleSubMenuSelected(e.key)}>
+							<Menu.Item key="bubblesort"><Link to="/bubblesort">Bubble Sort</Link></Menu.Item>
+							<Menu.Item key="quicksort"><Link to="/quicksort">Quick Sort</Link></Menu.Item>
 							<Menu.Item key="3"><Link to="/">??Sort</Link></Menu.Item>
 							<Menu.Item key="4"><Link to="/">??Sort</Link></Menu.Item>
 						</SubMenu>
-						<SubMenu key="sub2" title="subnav 2">
+						<SubMenu key="sub2" title="subnav 2" onTitleClick={(e) => this.handleSubMenuSelected(e.key)}>
 							<Menu.Item key="5">option5</Menu.Item>
 							<Menu.Item key="6">option6</Menu.Item>
 							<Menu.Item key="7">option7</Menu.Item>
 							<Menu.Item key="8">option8</Menu.Item>
 						</SubMenu>
-						<SubMenu key="sub3" title="subnav 3">
+						<SubMenu key="sub3" title="subnav 3" onTitleClick={(e) => this.handleSubMenuSelected(e.key)}>
 							<Menu.Item key="9">option9</Menu.Item>
 							<Menu.Item key="10">option10</Menu.Item>
 							<Menu.Item key="11">option11</Menu.Item>
@@ -75,8 +84,8 @@ class App extends React.Component{
 					<Layout style={{ padding: '0 24px 24px' }}>
 						<Breadcrumb style={{ margin: '16px 0' }}>
 						<Breadcrumb.Item>Home</Breadcrumb.Item>
-						<Breadcrumb.Item>List</Breadcrumb.Item>
-						<Breadcrumb.Item>App</Breadcrumb.Item>
+						{this.state.subMenuTitle.length != 0 ? <Breadcrumb.Item>{this.state.subMenuTitle}</Breadcrumb.Item> : <></>}
+						{this.state.menuItemTitle.length != 0 ? <Breadcrumb.Item>{this.state.menuItemTitle}</Breadcrumb.Item> : <></>}
 						</Breadcrumb>
 
 						<Content style={{ padding: '0 50px', margin: '16px 0'}}>

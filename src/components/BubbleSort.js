@@ -1,12 +1,17 @@
 import React from 'react';
 import P5Wrapper from 'react-p5-wrapper';
+import { context, canvasSize } from '../Context';
 
 function sketch (p) {
   let rotation = 0;
   var values = [];
   let i = 0;
   let j = 0;
-  let width = 1200, height= 600;
+  let width = canvasSize.width, height= canvasSize.height;
+
+  p.myCustomRedrawAccordingToNewPropsHandler = function(props){
+    p.frameRate(props.settings.frameRate);
+  }
 
   function bubbleSort(){
     for(let k = 0;k<8;k++){
@@ -39,7 +44,6 @@ function sketch (p) {
 
   p.setup = function () {
     p.createCanvas(width, height);
-    p.frameRate(10);
 
     for(let i = 0; i < width/8; i++){
       values.push(p.random(height));
@@ -58,10 +62,14 @@ function sketch (p) {
   
 };
 
-export default class BubbleSort extends React.Component{
+class BubbleSort extends React.Component{
   render(){
     return(
-      <P5Wrapper sketch={sketch} ></P5Wrapper>
+      <P5Wrapper sketch={sketch} settings={this.context} ></P5Wrapper>
     );
   }
 }
+
+BubbleSort.contextType = context;
+
+export default BubbleSort;

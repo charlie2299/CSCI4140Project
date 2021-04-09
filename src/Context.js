@@ -1,9 +1,8 @@
 import React from 'react';
 
-export const canvasSettings = {
+export const canvasSize = {
     width: 1200,
     height: 600,
-    frameRate: 10
 };
 
-export const context = React.createContext(canvasSettings);
+export const context = React.createContext({frameRate: 10});

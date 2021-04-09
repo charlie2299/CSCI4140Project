@@ -1,5 +1,5 @@
 import React from 'react';
-import { context } from "../Context";
+import { context, canvasSize } from "../Context";
 
 class QuickSort extends React.Component{
     constructor(props){
@@ -7,9 +7,8 @@ class QuickSort extends React.Component{
     }
     render(){
         let settings = this.context;
-        console.log("settings", settings);
         return(
-            <div>quicksort{settings.width}</div>
+            <div>quicksort</div>
         );
     }
 }
