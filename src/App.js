@@ -1,9 +1,10 @@
 import React from 'react';
-import { Layout, Menu, Breadcrumb, Typography } from 'antd';
+import { Layout, Menu, Breadcrumb, Typography, Row, Col } from 'antd';
 import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
 import 'antd/dist/antd.css';
 
-import { canvasSettings, context } from './Context';
+import { context } from './Context';
+import SpeedSlider from './components/SpeedSlider';
 import BubbleSort from './components/BubbleSort';
 import QuickSort from './components/QuickSort';
 const { SubMenu } = Menu;
@@ -22,6 +23,11 @@ class App extends React.Component{
 			subMenuTitle: "",
 			menuItemTitle: "",
 		};
+	}
+
+	handleFrameRateChange = (rate) => {
+		console.log("frame change", rate);
+		this.setState({frameRate: rate}, () => console.log(this.state.frameRate));
 	}
 
 	constructCanvasSettings(){
@@ -90,6 +96,7 @@ class App extends React.Component{
 
 						<Content style={{ padding: '0 50px', margin: '16px 0'}}>
 							<context.Provider value={this.constructCanvasSettings()}>
+								<SpeedSlider handleFrameRateChange={this.handleFrameRateChange}></SpeedSlider>
 								<Switch>
 									<Route path="/bubblesort">
 										<BubbleSort />
