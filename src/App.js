@@ -2,6 +2,7 @@ import React from 'react';
 import { Layout, Menu, Breadcrumb, Typography } from 'antd';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import 'antd/dist/antd.css';
+//import Canvas from './components/HanoTower';
 import Canvas from './components/Stack';
 const { SubMenu } = Menu;
 const { Title, Text } = Typography;

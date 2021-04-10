@@ -6,5 +6,6 @@
 
 ## Team Members
 ZeqinZheng 1155108667
+Wong Kin Chi 1155109665
 
 

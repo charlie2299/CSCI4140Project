@@ -116,11 +116,16 @@ function sketch (p) {
   p.push_f_Stack = function () {
     if(poped==1)
     {
+      if(first_stack[1][first-1]>empty[1][0] || first==0)
+      {
         first++;
         poped=0;
         first_stack[0][first-1]=empty[0][0];
         first_stack[1][first-1]=empty[1][0];
         err.html("Success Push");
+      }
+      else
+        err.html("No disk may be placed on top of a disk which is smaller than it.");
     }
     else
       err.html("No poped block");
@@ -128,11 +133,16 @@ function sketch (p) {
   p.push_s_Stack = function () {
     if(poped==1)
     {
+      if(second_stack[1][second-1]>empty[1][0] || second==0)
+      {
         second++;
         poped=0;
         second_stack[0][second-1]=empty[0][0];
         second_stack[1][second-1]=empty[1][0];
         err.html("Success Push");
+      }
+      else
+        err.html("No disk may be placed on top of a disk which is smaller than it.");
     }
     else
       err.html("No poped block");
@@ -140,11 +150,16 @@ function sketch (p) {
   p.push_t_Stack = function () {
     if(poped==1)
     {
+      if(third_stack[1][third-1]>empty[1][0] || third==0)
+      {
         third++;
         poped=0;
         third_stack[0][third-1]=empty[0][0];
         third_stack[1][third-1]=empty[1][0];
         err.html("Success Push");
+      }
+      else
+        err.html("No disk may be placed on top of a disk which is smaller than it.");
     }
     else
       err.html("No poped block");
