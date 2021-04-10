@@ -3,10 +3,12 @@ import { Layout, Menu, Breadcrumb, Typography, Row, Col } from 'antd';
 import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
 import 'antd/dist/antd.css';
 
-import { context } from './Context';
+import { context, contextSettings } from './Context';
 import SpeedSlider from './components/SpeedSlider';
 import BubbleSort from './components/BubbleSort';
 import QuickSort from './components/QuickSort';
+import ButtonCrontrols from './components/ButtonControls';
+
 const { SubMenu } = Menu;
 const { Title, Text } = Typography;
 const { Header, Sider, Content } = Layout;
@@ -22,8 +24,15 @@ class App extends React.Component{
 			openKeys: ["Sorting"],
 			subMenuTitle: "",
 			menuItemTitle: "",
+			paused: false,
+			stepMode: false,
+			restart: false,
 		};
 	}
+
+	handleRestart = () => { this.setState({restart: true}, () => this.setState({restart: false})); }
+	handleStop = () => { this.setState({paused: true}); }
+	handleResume = () => { this.setState({paused: false}); }
 
 	handleFrameRateChange = (rate) => {
 		console.log("frame change", rate);
@@ -31,11 +40,12 @@ class App extends React.Component{
 	}
 
 	constructCanvasSettings(){
-		let settings = {
-			frameRate: this.state.frameRate
-		};
+		contextSettings.frameRate = this.state.frameRate;
+		contextSettings.paused = this.state.paused;
+		contextSettings.stepMode = this.state.stepMode;
+		contextSettings.restart = this.state.restart;
 
-		return settings;
+		return contextSettings;
 	}
 
 	handleMenuItemSelected(key){
@@ -96,7 +106,15 @@ class App extends React.Component{
 
 						<Content style={{ padding: '0 50px', margin: '16px 0'}}>
 							<context.Provider value={this.constructCanvasSettings()}>
-								<SpeedSlider handleFrameRateChange={this.handleFrameRateChange}></SpeedSlider>
+								<div style={{paddingBottom: '20px'}}>
+									<SpeedSlider handleFrameRateChange={this.handleFrameRateChange}></SpeedSlider>
+									<ButtonCrontrols
+										handleStop={this.handleStop}
+										handleResume={this.handleResume}
+										handleRestart={this.handleRestart}
+									>
+									</ButtonCrontrols>
+								</div>
 								<Switch>
 									<Route path="/bubblesort">
 										<BubbleSort />
