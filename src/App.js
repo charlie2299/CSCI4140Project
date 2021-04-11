@@ -27,12 +27,14 @@ class App extends React.Component{
 			paused: false,
 			stepMode: false,
 			restart: false,
+			nextStep: false,
 		};
 	}
 
 	handleRestart = () => { this.setState({restart: true}, () => this.setState({restart: false})); }
 	handleStop = () => { this.setState({paused: true}); }
 	handleResume = () => { this.setState({paused: false}); }
+	handleStep = () => {this.setState({nextStep: true}, () => this.setState({nextStep: false})); }
 
 	handleFrameRateChange = (rate) => {
 		console.log("frame change", rate);
@@ -44,6 +46,7 @@ class App extends React.Component{
 		contextSettings.paused = this.state.paused;
 		contextSettings.stepMode = this.state.stepMode;
 		contextSettings.restart = this.state.restart;
+		contextSettings.nextStep = this.state.nextStep;
 
 		return contextSettings;
 	}
@@ -112,6 +115,7 @@ class App extends React.Component{
 										handleStop={this.handleStop}
 										handleResume={this.handleResume}
 										handleRestart={this.handleRestart}
+										handleStep={this.handleStep}
 									>
 									</ButtonCrontrols>
 								</div>

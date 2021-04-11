@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Button, Typography, Tag, Switch } from 'antd';
+import { Row, Col, Button, Typography, Tag, Switch, Space } from 'antd';
 
 const { CheckableTag } = Tag;
 const { Title } = Typography;
@@ -7,11 +7,20 @@ const { Title } = Typography;
 class ButtonCrontrols extends React.Component{
     constructor(props){
         super(props);
+        this.state = {
+            disableStepButton: true,
+        };
     }
+
+    toggleStepMode = () => {
+        this.setState({ disableStepButton: (this.state.disableStepButton ? false : true)});
+        this.props.handleStop();
+    }
+
     render(){
         return(
             <>
-            <Row gutter={[24, 24]}>
+            <Row gutter={[24, 24]} align="middle">
                 <Col span={4}>
                     <Button type="danger" block={true} onClick={() => this.props.handleStop()}>Stop</Button>
                 </Col>
@@ -21,10 +30,12 @@ class ButtonCrontrols extends React.Component{
                 <Col span={4}>
                     <Button type="primary" block={true} onClick={() => this.props.handleRestart()}>Restart</Button>
                 </Col>
-            </Row>
-            <Row align="middle">
-                <Col><Title level={3}>Step Mode</Title></Col>
-                <Col><Switch ></Switch></Col>
+                <Col span={12}>
+                    <Space>
+                    <Title level={3} type="success">Step Mode <Switch onChange={this.toggleStepMode}></Switch></Title>
+                    <Button type="primary" block={true} disabled={this.state.disableStepButton} shape="round" onClick={() => this.props.handleStep()} >Next Step</Button>
+                    </Space>
+                </Col>
             </Row>
             </>
         );

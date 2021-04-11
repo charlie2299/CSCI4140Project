@@ -4,11 +4,12 @@ import { context, canvasSize } from '../Context';
 
 function arr(){
   this.values = [];
+  this.i = 0;
 }
 
 function sketch (p) {
   let rotation = 0;
-  var obj;
+  let obj;
   let i = 0;
   let j = 0;
   let width = canvasSize.width, height= canvasSize.height;
@@ -18,6 +19,7 @@ function sketch (p) {
     for(let i = 0; i < width/8; i++){
       obj.values.push(p.random(height));
     }
+    i = 0; j = 0;
   }
 
   p.myCustomRedrawAccordingToNewPropsHandler = function(props){
@@ -33,11 +35,14 @@ function sketch (p) {
         p.redraw();
       }
     }
+    if(props.settings.nextStep){
+      p.redraw();
+    }
   }
 
   function bubbleSort(){
     for(let k = 0;k<8;k++){
-      if(i<obj.values.length){
+      if(i < obj.values.length){
         let temp = obj.values[j];
         if(obj.values[j] > obj.values[j+1]){
           obj.values[j] = obj.values[j+1];
