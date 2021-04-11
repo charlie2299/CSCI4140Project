@@ -36,6 +36,9 @@ class App extends React.Component{
 	handleResume = () => { this.setState({paused: false}); }
 	handleStep = () => {this.setState({nextStep: true}, () => this.setState({nextStep: false})); }
 
+	handleMenuItemSelected(key){this.setState({menuItemTitle: key});}
+	handleSubMenuSelected(key){this.setState({subMenuTitle: key, openKeys: [key], menuItemTitle: ""});}
+
 	handleFrameRateChange = (rate) => {
 		console.log("frame change", rate);
 		this.setState({frameRate: rate}, () => console.log(this.state.frameRate));
@@ -49,14 +52,6 @@ class App extends React.Component{
 		contextSettings.nextStep = this.state.nextStep;
 
 		return contextSettings;
-	}
-
-	handleMenuItemSelected(key){
-		this.setState({menuItemTitle: key});
-	}
-
-	handleSubMenuSelected(key){
-		this.setState({subMenuTitle: key, openKeys: [key], menuItemTitle: ""});
 	}
 
   render(){
