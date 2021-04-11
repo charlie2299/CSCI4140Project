@@ -4,7 +4,7 @@ import P5Wrapper from 'react-p5-wrapper';
 
 function sketch (p) {
 
-  var first=5;
+  var first=6;
   var second=0;
   var third=0;
   var poped=0;
@@ -20,7 +20,9 @@ function sketch (p) {
   var err;
   
   p.setup = function () {
-    p.createCanvas(1000, 800, p.WEBGL);
+    p.createP("The Hano Tower is similar to an normal stack with some contraints.<br>"+
+    "For an normal stack, the data in the stack in can be poped or pushed without compare them.");
+    p.createCanvas(1050, 800, p.WEBGL);
     p.frameRate(30);
 
     for(var i =1;i<=15;i++)
@@ -30,29 +32,30 @@ function sketch (p) {
     }
 
     p.push_f_Button = p.createButton('Push');
-    p.push_f_Button.position(340,850);
+    p.push_f_Button.position(340,900);
     p.push_f_Button.mousePressed(p.push_f_Stack);
     
     p.pop_f_Button = p.createButton('Pop');
-    p.pop_f_Button.position(510,850);
+    p.pop_f_Button.position(530,900);
     p.pop_f_Button.mousePressed(p.pop_f_Stack);
 
     p.push_s_Button = p.createButton('Push');
-    p.push_s_Button.position(670,850);
+    p.push_s_Button.position(670,900);
     p.push_s_Button.mousePressed(p.push_s_Stack);
     
     p.pop_s_Button = p.createButton('Pop');
-    p.pop_s_Button.position(830,850);
+    p.pop_s_Button.position(860,900);
     p.pop_s_Button.mousePressed(p.pop_s_Stack);
 
     p.push_t_Button = p.createButton('Push');
-    p.push_t_Button.position(990,850);
+    p.push_t_Button.position(990,900);
     p.push_t_Button.mousePressed(p.push_t_Stack);
     
     p.pop_t_Button = p.createButton('Pop');
-    p.pop_t_Button.position(1160,850);
+    p.pop_t_Button.position(1160,900);
     p.pop_t_Button.mousePressed(p.pop_t_Stack);
     
+    p.createP("State:");
     err = p.createP("");
 
   };
@@ -81,6 +84,7 @@ function sketch (p) {
 
     p.push();
     p.translate(0, 350, -300);
+    p.box(1100, 50, 500);
     for(i=0;i<second;i++)
     {
       p.directionalLight(0, 5*(i+1), 5*(i+1),0,dirY,-2);

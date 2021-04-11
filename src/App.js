@@ -1,9 +1,10 @@
 import React from 'react';
 import { Layout, Menu, Breadcrumb, Typography } from 'antd';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
 import 'antd/dist/antd.css';
-//import Canvas from './components/HanoTower';
-import Canvas from './components/Stack';
+import Tower from './components/HanoTower';
+import Stack from './components/Stack';
+import ArrayStack from './components/ArrayS';
 const { SubMenu } = Menu;
 const { Title, Text } = Typography;
 const { Header, Sider, Content } = Layout;
@@ -35,11 +36,11 @@ class App extends React.Component{
                         <Menu.Item key="3">option3</Menu.Item>
                         <Menu.Item key="4">option4</Menu.Item>
                     </SubMenu>
-                    <SubMenu key="sub2" title="subnav 2">
-                        <Menu.Item key="5">option5</Menu.Item>
-                        <Menu.Item key="6">option6</Menu.Item>
-                        <Menu.Item key="7">option7</Menu.Item>
-                        <Menu.Item key="8">option8</Menu.Item>
+                    <SubMenu key="sub2" title="Stack">
+                        <Menu.Item key="5"><Link to="/tower">Hano Tower</Link></Menu.Item>
+                        <Menu.Item key="6"><Link to="/noraml">Noraml Stack</Link></Menu.Item>
+                        <Menu.Item key="7"><Link to="/arrayStack">Array Implementation</Link></Menu.Item>
+                        <Menu.Item key="8"><Link to="/listStack">Linked List Implementation</Link></Menu.Item>
                     </SubMenu>
                     <SubMenu key="sub3" title="subnav 3">
                         <Menu.Item key="9">option9</Menu.Item>
@@ -56,24 +57,18 @@ class App extends React.Component{
                     <Breadcrumb.Item>App</Breadcrumb.Item>
                     </Breadcrumb>
                     <Content style={{ padding: '0 50px', margin: '16px 0'}}>
-                        <Canvas></Canvas>
-                        {/* <Switch>
-                            <Route path="/slideshow">
-                                <Slideshow />
+                        
+                        <Switch>
+                            <Route path="/tower">
+                                <Tower></Tower>
                             </Route>
-                            <Route path="/file/:id">
-                                <Main></Main>
+                            <Route path="/noraml">
+                                <Stack></Stack>
                             </Route>
-                            <Route path="/file">
-                                <Main></Main>
+                            <Route path="/arrayStack">
+                                <ArrayStack></ArrayStack>
                             </Route>
-                            <Route exact path="/">
-                                <Home></Home>
-                            </Route>
-                            <Route path="*">
-                                <NoMatch></NoMatch>
-                            </Route>
-                        </Switch> */}
+                        </Switch>
                     </Content>
                 </Layout>
             </Layout>

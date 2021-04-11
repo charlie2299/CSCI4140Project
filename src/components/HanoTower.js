@@ -20,7 +20,7 @@ function sketch (p) {
   var err;
   
   p.setup = function () {
-    p.createCanvas(1000, 800, p.WEBGL);
+    p.createCanvas(1050, 800, p.WEBGL);
     p.frameRate(30);
 
     for(var i =1;i<=15;i++)
@@ -52,7 +52,9 @@ function sketch (p) {
     p.pop_t_Button = p.createButton('Pop');
     p.pop_t_Button.position(1160,850);
     p.pop_t_Button.mousePressed(p.pop_t_Stack);
+
     
+    p.createP("State:");
     err = p.createP("");
 
   };
@@ -68,6 +70,8 @@ function sketch (p) {
     dirX=dirX+x*0.5;
     dirY=dirY+x*0.5;
 
+    
+
     p.push();
     p.translate(-400, 350, -300);
     for(var i=0;i<first;i++)
@@ -81,6 +85,7 @@ function sketch (p) {
 
     p.push();
     p.translate(0, 350, -300);
+    p.box(1100, 50, 500);
     for(i=0;i<second;i++)
     {
       p.directionalLight(0, 5*(i+1), 5*(i+1),0,dirY,-2);
