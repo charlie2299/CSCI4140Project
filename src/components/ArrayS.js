@@ -5,18 +5,20 @@ import P5Wrapper from 'react-p5-wrapper';
 function sketch (p) {
 
   var count=0;
+  var origin=0;
 
   p.stored=[];
+  p.list=[];
 
   p.setup = function () {
-    p.createCanvas(2000, 500 );
+    p.createCanvas(2000, 500 , p.WEBGL);
 
     p.length = p.createInput();
     p.length.position(250,150);
     p.vol_Button = p.createButton('Init Array Length');
     p.vol_Button.position(p.length.x + p.length.width,150);
     p.vol_Button.mousePressed(p.initLength);
-    p.warn=p.createP("Max: 15");
+    p.warn=p.createP("Min: 1 Max: 15");
     p.warn.position(p.vol_Button.x + 10 + p.vol_Button.width,150);
 
     p.state=p.createP("State: None");
@@ -30,12 +32,18 @@ function sketch (p) {
   };
 
   p.initLength = function(){
-    if(parseInt(p.length.value())<=15)
+    if(parseInt(p.length.value())<=15 && parseInt(p.length.value())>0)
     {
+      origin=parseInt(p.length.value());
+
+      p.pop();
+      p.translate(-1022, -122, 0);
       for(var i =0;i<parseInt(p.length.value());i++)
       {
-        p.square(i*50, 100, 50);
+        p.translate(50, 0, 0);
+        p.list.push(p.box(50,50,1));    
       }
+      p.push();
       p.length.remove();
       p.vol_Button.remove();
       p.warn.remove();
@@ -71,10 +79,13 @@ function sketch (p) {
       var length =parseInt(p.length.value());
       if(count==length && length*2<=30)
       {
+        p.pop();
         for(var i =length;i<2*length;i++)
         {
-          p.square(i*50, 100, 50);
+          p.translate(50, 0, 0);
+          p.list.push(p.box(50,50,1));
         }
+        p.push();
         p.length.value((length*2).toString());
         p.state.html("State: Pushed ["+p.input.value()+"] and Doubled the size of array");
         p.stackLength.html("Length: "+p.length.value());

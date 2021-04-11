@@ -5,6 +5,7 @@ import 'antd/dist/antd.css';
 import Tower from './components/HanoTower';
 import Stack from './components/Stack';
 import ArrayStack from './components/ArrayS';
+import ListStack from './components/ListS';
 const { SubMenu } = Menu;
 const { Title, Text } = Typography;
 const { Header, Sider, Content } = Layout;
@@ -67,6 +68,9 @@ class App extends React.Component{
                             </Route>
                             <Route path="/arrayStack">
                                 <ArrayStack></ArrayStack>
+                            </Route>
+                            <Route path="/listStack">
+                                <ListStack></ListStack>
                             </Route>
                         </Switch>
                     </Content>
