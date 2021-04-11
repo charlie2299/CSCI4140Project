@@ -8,6 +8,9 @@ function sketch (p) {
     var count=0;
     let gravity = 9.0;
     let mass = 2.0;
+
+    var err;
+    var length;
     
      p.setup = function() {
       p.createCanvas(900, 800);
@@ -23,6 +26,12 @@ function sketch (p) {
       p.push_Button = p.createButton('Pop');
       p.push_Button.position(1100,200);
       p.push_Button.mousePressed(p.pop_List);
+      p.reset_Button = p.createButton('Reset');
+      p.reset_Button.position(1100,850);
+      p.reset_Button.mousePressed(p.reset_List);
+
+      length = p.createP("Length: 0");
+      err = p.createP("State: None.");
     }
     
     p.draw =function () {
@@ -74,14 +83,25 @@ function sketch (p) {
         p.temp = new p.Spring2D(0.0, 10 / 2, mass, gravity);
         p.linked.push(p.temp);
         count++;
+        length.html("Length: "+count);
+        err.html("State: Pushed and Linked.");
     }
+
     p.pop_List = function(){
         if(count>0)
         {
             p.linked.pop(p.temp);
             count--;
+            length.html("Length: "+count);
+            err.html("State: Poped and Unlink.");
         }
+        else
+          err.html("State: Empty Link");
     }
+
+    p.reset_List = function(){
+      window.location.reload();
+  }
 };
 
 export default class Canvas extends React.Component{
