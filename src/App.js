@@ -6,6 +6,10 @@ import Tower from './components/HanoTower';
 import Stack from './components/Stack';
 import ArrayStack from './components/ArrayS';
 import ListStack from './components/ListS';
+
+import BalancedBinaryTree from './components/BalancedBinaryTree';
+import UnbalancedBinaryTree from './components/UnbalancedBinaryTree';
+import BinarySreachTree from './components/BinarySreachTree';
 const { SubMenu } = Menu;
 const { Title, Text } = Typography;
 const { Header, Sider, Content } = Layout;
@@ -43,9 +47,9 @@ class App extends React.Component{
                         <Menu.Item key="7"><Link to="/arrayStack">Array Implementation</Link></Menu.Item>
                         <Menu.Item key="8"><Link to="/listStack">Linked List Implementation</Link></Menu.Item>
                     </SubMenu>
-                    <SubMenu key="sub3" title="subnav 3">
-                        <Menu.Item key="9">option9</Menu.Item>
-                        <Menu.Item key="10">option10</Menu.Item>
+                    <SubMenu key="sub3" title="Binary Tree">
+                        <Menu.Item key="9"><Link to="/binaryTree">Balanced Tree</Link></Menu.Item>
+                        <Menu.Item key="10"><Link to="/unbalancedBinaryTree">Unbalanced Tree</Link></Menu.Item>
                         <Menu.Item key="11">option11</Menu.Item>
                         <Menu.Item key="12">option12</Menu.Item>
                     </SubMenu>
@@ -71,6 +75,12 @@ class App extends React.Component{
                             </Route>
                             <Route path="/listStack">
                                 <ListStack></ListStack>
+                            </Route>
+                            <Route path="/binaryTree">
+                                <BalancedBinaryTree></BalancedBinaryTree>
+                            </Route>
+                            <Route path="/unbalancedBinaryTree">
+                                <UnbalancedBinaryTree></UnbalancedBinaryTree>
                             </Route>
                         </Switch>
                     </Content>
