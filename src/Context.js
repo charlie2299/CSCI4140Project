@@ -6,10 +6,13 @@ export const canvasSize = {
 };
 
 export const contextSettings = {
-    frameRate:10,
+    frameRate:50,
     paused: false,
     stepMode: false,
     restart: false,
+    nextStep: false,
+    numberOfElementsChanged: false,
+    numberOfElements: 40,
 };
 
 export const context = React.createContext(contextSettings);

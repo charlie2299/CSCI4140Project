@@ -3,11 +3,12 @@ import { Layout, Menu, Breadcrumb, Typography, Row, Col } from 'antd';
 import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
 import 'antd/dist/antd.css';
 
-import { context, contextSettings } from './Context';
+import { context, contextSettings as settings } from './Context';
 import SpeedSlider from './components/SpeedSlider';
 import BubbleSort from './components/BubbleSort';
 import QuickSort from './components/QuickSort';
 import ButtonCrontrols from './components/ButtonControls';
+import UserInputs from './components/UserInputs';
 
 const { SubMenu } = Menu;
 const { Title, Text } = Typography;
@@ -20,39 +21,27 @@ class App extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			frameRate: 10,
 			openKeys: ["Sorting"],
 			subMenuTitle: "",
 			menuItemTitle: "",
-			paused: false,
-			stepMode: false,
-			restart: false,
-			nextStep: false,
+			contextSettings: settings,
 		};
 	}
 
-	handleRestart = () => { this.setState({restart: true}, () => this.setState({restart: false})); }
-	handleStop = () => { this.setState({paused: true}); }
-	handleResume = () => { this.setState({paused: false}); }
-	handleStep = () => {this.setState({nextStep: true}, () => this.setState({nextStep: false})); }
+	handleFrameRateChange = (rate) => {this.setState({contextSettings: { ...this.state.contextSettings, frameRate: rate}});}
+	handleRestart = () => { this.setState({contextSettings:{...this.state.contextSettings, restart: true}}, () => this.setState({contextSettings:{...this.state.contextSettings, restart: false}})); }
+	handleStop = () => { this.setState({contextSettings:{...this.state.contextSettings, paused: true}}); }
+	handleResume = () => { this.setState({contextSettings: {...this.state.contextSettings, paused: false}}); }
+	handleStep = () => {this.setState({contextSettings:{...this.state.contextSettings, nextStep: true}}, () => this.setState({contextSettings:{...this.state.contextSettings, nextStep: false}})); }
+
+	handleNumberofElements = (num) => { 
+		// console.log(num, typeof(num));
+		this.setState({contextSettings: {...this.state.contextSettings, numberOfElements: num, numberOfElementsChanged: true}}, 
+									()=> { this.setState({contextSettings: {...this.state.contextSettings, numberOfElementsChanged: false}}); } );  
+	}
 
 	handleMenuItemSelected(key){this.setState({menuItemTitle: key});}
 	handleSubMenuSelected(key){this.setState({subMenuTitle: key, openKeys: [key], menuItemTitle: ""});}
-
-	handleFrameRateChange = (rate) => {
-		console.log("frame change", rate);
-		this.setState({frameRate: rate}, () => console.log(this.state.frameRate));
-	}
-
-	constructCanvasSettings(){
-		contextSettings.frameRate = this.state.frameRate;
-		contextSettings.paused = this.state.paused;
-		contextSettings.stepMode = this.state.stepMode;
-		contextSettings.restart = this.state.restart;
-		contextSettings.nextStep = this.state.nextStep;
-
-		return contextSettings;
-	}
 
   render(){
   return (
@@ -103,7 +92,7 @@ class App extends React.Component{
 						</Breadcrumb>
 
 						<Content style={{ padding: '0 50px', margin: '16px 0'}}>
-							<context.Provider value={this.constructCanvasSettings()}>
+							<context.Provider value={this.state.contextSettings}>
 								<div style={{paddingBottom: '20px'}}>
 									<SpeedSlider handleFrameRateChange={this.handleFrameRateChange}></SpeedSlider>
 									<ButtonCrontrols
@@ -113,6 +102,10 @@ class App extends React.Component{
 										handleStep={this.handleStep}
 									>
 									</ButtonCrontrols>
+									<UserInputs
+										handleNumberofElements={this.handleNumberofElements}
+									>
+									</UserInputs>
 								</div>
 								<Switch>
 									<Route path="/bubblesort">

@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col, Button, Typography, Tag, Switch, Space } from 'antd';
 
 const { CheckableTag } = Tag;
-const { Title } = Typography;
+const { Link, Title } = Typography;
 
 class ButtonCrontrols extends React.Component{
     constructor(props){
@@ -19,7 +19,6 @@ class ButtonCrontrols extends React.Component{
 
     render(){
         return(
-            <>
             <Row gutter={[24, 24]} align="middle">
                 <Col span={4}>
                     <Button type="danger" block={true} onClick={() => this.props.handleStop()}>Stop</Button>
@@ -32,12 +31,12 @@ class ButtonCrontrols extends React.Component{
                 </Col>
                 <Col span={12}>
                     <Space>
-                    <Title level={3} type="success">Step Mode <Switch onChange={this.toggleStepMode}></Switch></Title>
+                    <Title level={3} type="success" style={{margin: 0}}><Link>Step Mode</Link></Title>
+                    <Switch onChange={this.toggleStepMode}></Switch>
                     <Button type="primary" block={true} disabled={this.state.disableStepButton} shape="round" onClick={() => this.props.handleStep()} >Next Step</Button>
                     </Space>
                 </Col>
             </Row>
-            </>
         );
     }
 }

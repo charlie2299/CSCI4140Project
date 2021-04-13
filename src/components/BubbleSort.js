@@ -1,62 +1,107 @@
 import React from 'react';
 import P5Wrapper from 'react-p5-wrapper';
-import { context, canvasSize } from '../Context';
+import { context, canvasSize, contextSettings } from '../Context';
 import canvasController from "./canvasController";
 
 function sketch (p) {
   let values = [];
-  let i = 0;
-  let j = 0;
+  let i = 0, j = 0;
   let width = canvasSize.width, height= canvasSize.height;
+  let columnWidth = width/contextSettings.numberOfElements;
+  let speed = columnWidth * 0.1;
+  let white = p.color("#ffffff"), black = p.color("#000000"), red = p.color("#ff0303");
+  let p1 = j*columnWidth, p2 = (j+1)*columnWidth;
 
-  let init = () => {
+  let init = (numberOfElements) => {
     values = [];
-    for(let i = 0; i < width/8; i++){
+    i = 0; j = 0;
+    
+    columnWidth = width/numberOfElements;
+    speed = columnWidth * 0.1;
+    p1 = j*columnWidth; p2 = (j+1)*columnWidth;
+    for(let i = 0; i < numberOfElements; i++){
       values.push(p.random(height));
     }
-    i = 0; j = 0;
   }
 
   let cc = new canvasController(p, init);  
   p.myCustomRedrawAccordingToNewPropsHandler = cc.propsHandler;
 
+  function needToSwap(){
+    if(i < values.length && values[j] > values[j+1]){
+      return true;
+    }
+    return false;
+  }
+
+  function movePtrs(){
+    j++;
+    p1 = j*columnWidth;
+    p2 = (j+1)*columnWidth;
+    
+    if(j>=values.length-i-1){
+      j = 0;
+      i++;
+    }
+  }
+
   function bubbleSort(){
-    for(let k = 0;k<8;k++){
-      if(i < values.length){
-        let temp = values[j];
-        if(values[j] > values[j+1]){
-          values[j] = values[j+1];
-          values[j+1] = temp;
-        }
-        j++;
-        
-        if(j>=values.length-i-1){
-          j = 0;
-          i++;
-        }
-      }
-      else{
-        p.noLoop();
-      }
+    if(i < values.length){
+      let temp = values[j];
+      values[j] = values[j+1];
+      values[j+1] = temp;
+
+      movePtrs();
+    }
+    else{
+      p.noLoop();
     }
   }
 
   function simulateSorting(){
-    for(let i = 0;i<values.length;i++){
-      p.stroke(100, 143, 143);
-      p.fill(50);
-      p.rect(i*8 , height, 8, -values[i],20);
-     }
+    // swapOnce = false;
+    if(needToSwap()) {
+      p1 += speed; p2 -= speed;
+    }else{
+      movePtrs();
+    }
+
+    for(let i = 0; i< values.length; i++){
+      if(i == j)
+      {
+        p.fill(black);
+        p.strokeWeight(5);
+        p.stroke(red);
+        p.rect(p1, height, columnWidth, -values[i], 20);
+      }
+      else if(i == j+1)
+      {
+        p.strokeWeight(4);
+        p.stroke(white);
+        p.fill(black);
+        p.rect(p2, height, columnWidth, -values[i], 20);
+      }
+      else{
+        p.strokeWeight(1);
+        p.stroke(black);
+        p.fill(white);
+        p.rect(i*columnWidth, height, columnWidth, -values[i], 20);
+      }
+    }
+
+    if(j*columnWidth+columnWidth <= p1)
+    { 
+      bubbleSort();
+    }
   }
 
   p.setup = function () {
     p.createCanvas(width, height);
-    init();
+    init(width/columnWidth);
   };
 
   p.draw = function () {
     p.background(220);
-    bubbleSort();
     simulateSorting();
   };
   
