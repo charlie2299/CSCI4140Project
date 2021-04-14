@@ -9,6 +9,7 @@ import BubbleSort from './components/BubbleSort';
 import QuickSort from './components/QuickSort';
 import ButtonCrontrols from './components/ButtonControls';
 import UserInputs from './components/UserInputs';
+import MergeSort from './components/MergeSort';
 
 const { SubMenu } = Menu;
 const { Title, Text } = Typography;
@@ -67,7 +68,7 @@ class App extends React.Component{
 						<SubMenu key="Sorting"  title="Sorting" onTitleClick={(e) => this.handleSubMenuSelected(e.key)}>
 							<Menu.Item key="bubblesort"><Link to="/bubblesort">Bubble Sort</Link></Menu.Item>
 							<Menu.Item key="quicksort"><Link to="/quicksort">Quick Sort</Link></Menu.Item>
-							<Menu.Item key="3"><Link to="/">??Sort</Link></Menu.Item>
+							<Menu.Item key="3"><Link to="/mergesort">Merge Sort</Link></Menu.Item>
 							<Menu.Item key="4"><Link to="/">??Sort</Link></Menu.Item>
 						</SubMenu>
 						<SubMenu key="sub2" title="subnav 2" onTitleClick={(e) => this.handleSubMenuSelected(e.key)}>
@@ -114,10 +115,10 @@ class App extends React.Component{
 									<Route path="/quicksort">
 										<QuickSort />
 									</Route>
-									{/* <Route exact path="/">
-										<Home></Home>
+									<Route path="/mergesort">
+										<MergeSort></MergeSort>
 									</Route>
-									<Route path="*">
+									{/* <Route path="*">
 										<NoMatch></NoMatch>
 									</Route> */}
 								</Switch>

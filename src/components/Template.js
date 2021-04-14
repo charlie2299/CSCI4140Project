@@ -26,8 +26,9 @@ function sketch(p) {
     // declare objects
     let algo = undefined, canvas = undefined, nums = [];
 
-    let init = () =>{
-        canvas = new Canvas(canvasSize.width, canvasSize.height, contextSettings.numberOfElements);
+    let init = (numberOfElements) =>{
+        if(numberOfElements === undefined) numberOfElements = contextSettings.numberOfElements;
+        canvas = new Canvas(canvasSize.width, canvasSize.height, numberOfElements);
         p.createCanvas(canvas.width, canvas.height);
         nums = [];
         for(let i = 0; i < canvas.numberOfElements; i++) nums.push(p.random(canvas.height));
