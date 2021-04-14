@@ -11,7 +11,7 @@ function sketch (p) {
     var interchange=1;
   
   p.setup = function () {
-    p.createP("Below is a animation shown the structure of a unbalanced binary tree.");
+    p.createP("Below is a animation shown the structure of a balanced binary search tree.");
     p.createP("You can adjust the angle between each branch by moving your mouse horizontally, you can also stop or resume the animation by double clicking the mouse.");
     p.createCanvas(1200, 800);
     p.frameRate(30);
@@ -25,6 +25,8 @@ function sketch (p) {
     p.change_Button = p.createButton("Show Interchange");
     p.change_Button.position(p.input.x ,310);
     p.change_Button.mousePressed(p.showInter);
+
+    p.createP("For the above animation, the purple color is used to differentiate the value compared to the previous node. In this case you can decide which color represents the greater side.");
     
 
   };
@@ -69,13 +71,12 @@ function sketch (p) {
           p.circle(0, 0, 3);
         }
         p.translate(0, -h*ratio); // Move to the end of the branch
-        if(count!=1)
-          p.branch(h,count);       // Ok, now call myself to draw two new branches!!
+        p.branch(h,count);       // Ok, now call myself to draw two new branches!!
         p.pop();     // Whenever we get back here, we "pop" in order to restore the previous matrix state
     
         // Repeat the same thing, only branch off to the "left" this time!
         p.push();
-        p.stroke(0,255,0);
+        p.stroke(255,0,255);
         p.rotate(-theta);
         if(length<100)
           ratio=2.5;
@@ -90,8 +91,7 @@ function sketch (p) {
           p.circle(0, 0, 3);
         }
         p.translate(0, -h*ratio); // Move to the end of the branch
-        
-          p.branch(h,count);
+        p.branch(h,count);
         p.pop();
       }
   }

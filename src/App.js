@@ -2,14 +2,16 @@ import React from 'react';
 import { Layout, Menu, Breadcrumb, Typography } from 'antd';
 import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
 import 'antd/dist/antd.css';
-import Tower from './components/HanoTower';
-import Stack from './components/Stack';
-import ArrayStack from './components/ArrayS';
-import ListStack from './components/ListS';
+import Tower from './components/Stack/HanoTower';
+import Stack from './components/Stack/Stack';
+import ArrayStack from './components/Stack/ArrayS';
+import ListStack from './components//Stack/ListS';
 
-import BalancedBinaryTree from './components/BalancedBinaryTree';
-import UnbalancedBinaryTree from './components/UnbalancedBinaryTree';
-import BinarySreachTree from './components/BinarySreachTree';
+import BalancedBinaryTree from './components/Tree/BalancedBinaryTree';
+import UnbalancedBinaryTree from './components/Tree/UnbalancedBinaryTree';
+import BinarySreachTree from './components/Tree/BinarySreachTree';
+import UserTree from './components/Tree/UserCreate';
+
 const { SubMenu } = Menu;
 const { Title, Text } = Typography;
 const { Header, Sider, Content } = Layout;
@@ -50,8 +52,8 @@ class App extends React.Component{
                     <SubMenu key="sub3" title="Binary Tree">
                         <Menu.Item key="9"><Link to="/binaryTree">Balanced Tree</Link></Menu.Item>
                         <Menu.Item key="10"><Link to="/unbalancedBinaryTree">Unbalanced Tree</Link></Menu.Item>
-                        <Menu.Item key="11">option11</Menu.Item>
-                        <Menu.Item key="12">option12</Menu.Item>
+                        <Menu.Item key="11"><Link to="/binarySearchTree">Binary Search Tree</Link></Menu.Item>
+                        <Menu.Item key="12"><Link to="/createTree">Try it yourself</Link></Menu.Item>
                     </SubMenu>
                     </Menu>
                 </Sider>
@@ -81,6 +83,12 @@ class App extends React.Component{
                             </Route>
                             <Route path="/unbalancedBinaryTree">
                                 <UnbalancedBinaryTree></UnbalancedBinaryTree>
+                            </Route>
+                            <Route path="/binarySearchTree">
+                                <BinarySreachTree></BinarySreachTree>
+                            </Route>
+                            <Route path="/createTree">
+                                <UserTree></UserTree>
                             </Route>
                         </Switch>
                     </Content>
