@@ -14,10 +14,36 @@ function AlgoMergeSort(nums, canvasWidth, canvasHeight, p){
     this.leftTop = this.edge*0.2;
     this.leftBottom = this.edge*0.75;
     this.halfEdge = this.edge/2;
-    
 
+    this.step = 0;
+    
+    // this.handleMouseClicked = () => {
+    //     this.step++;
+    //     p.redraw();
+    // }
+
+    // this.draw = () => {
+    //     switch (this.step) {
+    //         case 0:
+    //             for(let k = 0; k < this.nums.length; k++){
+    //                 p.rect(k*this.edge, this.edge, this.edge, -this.edge);
+        
+    //                 p.text(nums[k].toString(), this.leftTop+k*this.edge, this.leftBottom);
+    //             }
+    //             break;
+    //         case 1:
+
+    //             break;
+    //         case 'Papayas':
+    //             console.log('Mangoes and papayas are $2.79 a pound.');
+    //             // expected output: "Mangoes and papayas are $2.79 a pound."
+    //             break;
+    //         default:
+    //             console.log(`Sorry, we are out of ${this.step}.`);
+    //     }
+        
+    // }
     this.draw = () => {
-        // p.rect(0, 0, this.width/2, this.height);
         for(let k = 0; k < this.nums.length; k++){
             p.rect(k*this.edge, this.edge, this.edge, -this.edge);
 
