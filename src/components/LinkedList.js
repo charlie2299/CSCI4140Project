@@ -177,7 +177,7 @@ function sketch(p) {
         let btnTraverse = p.createButton('Traverse'), btnReverse = p.createButton('Reverse');
         let btnDelete = p.createButton('Delete');
         let canvas = document.getElementById("defaultCanvas0");
-        let posy = canvas.offsetTop, posx = canvas.offsetLeft, offsety = canvas.offsety, btnWidth = canvas.btnWidth;
+        let posy = canvas.offsetTop, posx = canvas.offsetLeft, offsety = 50, btnWidth = 70;
         btnTraverse.position(posx+btnWidth*1*2, posy+offsety);
         btnTraverse.mousePressed(algo.traverse);
 

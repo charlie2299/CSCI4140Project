@@ -69,8 +69,8 @@ class App extends React.Component{
 						<SubMenu key="Sorting"  title="Sorting" onTitleClick={(e) => this.handleSubMenuSelected(e.key)}>
 							<Menu.Item key="bubblesort"><Link to="/bubblesort">Bubble Sort</Link></Menu.Item>
 							<Menu.Item key="quicksort"><Link to="/quicksort">Quick Sort</Link></Menu.Item>
-							<Menu.Item key="3"><Link to="/mergesort">Merge Sort</Link></Menu.Item>
-							<Menu.Item key="4"><Link to="/">??Sort</Link></Menu.Item>
+							{/* <Menu.Item key="3"><Link to="/mergesort">Merge Sort</Link></Menu.Item>
+							<Menu.Item key="4"><Link to="/">??Sort</Link></Menu.Item> */}
 						</SubMenu>
 						<SubMenu key="sub2" title="subnav 2" onTitleClick={(e) => this.handleSubMenuSelected(e.key)}>
 							<Menu.Item key="5">option5</Menu.Item>
@@ -85,10 +85,10 @@ class App extends React.Component{
 							<Menu.Item key="12">option12</Menu.Item>
 						</SubMenu>
 						<SubMenu key="linkedlist" title="Linked List" onTitleClick={(e) => this.handleSubMenuSelected(e.key)}>
-							<Menu.Item key="constructList"><Link to="/construct-linked-list">Construction</Link></Menu.Item>
-							<Menu.Item key="14">option10</Menu.Item>
+							<Menu.Item key="constructList"><Link to="/construct-linked-list">Basic</Link></Menu.Item>
+							{/* <Menu.Item key="14">option10</Menu.Item>
 							<Menu.Item key="11">option11</Menu.Item>
-							<Menu.Item key="12">option12</Menu.Item>
+							<Menu.Item key="12">option12</Menu.Item> */}
 						</SubMenu>
 						</Menu>
 					</Sider>
@@ -122,15 +122,12 @@ class App extends React.Component{
 									<Route path="/quicksort">
 										<QuickSort />
 									</Route>
-									<Route path="/mergesort">
+									{/* <Route path="/mergesort">
 										<MergeSort></MergeSort>
-									</Route>
+									</Route> */}
 									<Route path="/construct-linked-list">
 										<LinkedList></LinkedList>
 									</Route>
-									{/* <Route path="*">
-										<NoMatch></NoMatch>
-									</Route> */}
 								</Switch>
 							</context.Provider>
 						</Content>
