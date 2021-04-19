@@ -3,6 +3,7 @@ import P5Wrapper from 'react-p5-wrapper';
 import { context, canvasSize, contextSettings } from '../Context';
 import canvasController from "./canvasController";
 import Canvas from './Canvas';
+import dist from 'react-p5-wrapper';
 
 function AlgoLinkedList(nums, canvasWidth, canvasHeight, p){
     this.traverseLock = false;
@@ -24,14 +25,20 @@ function AlgoLinkedList(nums, canvasWidth, canvasHeight, p){
     let numsOfElement = this.nums.length;
     for(let i = 0; i < numsOfElement-capacity+1; i++) {this.nums.pop();};
 
-    this.color = []; this.reversed = [];
-    for(let i = 0; i < this.nums.length; i++) {
-        this.color.push(white);
-        this.reversed.push(false);
+    this.color = []; this.reversed = []; this.selected = []; this.circleCenter = []; this.hide = [];
+
+    this.reset = () => {
+        this.color = []; this.reversed = []; this.selected = []; this.circleCenter = []; this.hide = [];
+        for(let i = 0; i < this.nums.length; i++) {
+            this.color.push(white);
+            this.reversed.push(false);
+            this.hide.push(false);
+            this.selected.push(false);
+            this.circleCenter.push(this.radius*i*3+this.offset);
+        }
     }
-
+    this.reset();
     
-
     this.sleep = (ms) => {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
@@ -82,17 +89,51 @@ function AlgoLinkedList(nums, canvasWidth, canvasHeight, p){
         this.traverseLock = false;
     }
 
+    this.delete = () => {
+        if(this.traverseLock) return;
+        this.traverseLock = true;
+        for(let i = 0; i < this.nums.length; i++){
+            if(this.selected[i]){
+                this.nums.splice(i, 1);
+                this.reset();
+                break;
+            }
+        }
+        this.traverseLock = false;
+    }
+
+    this.mousePressed = () => {
+        if(this.traverseLock) return;
+        this.traverseLock = true;
+        let k = 0; let valid = false;
+        for(;k < this.nums.length; k++){
+            if(p.dist(p.mouseX, p.mouseY, this.circleCenter[k], this.heightCenter) < this.radius){
+                if(this.selected[k]) {this.selected[k] = false; this.color[k] = white;}
+                else {this.selected[k] = true; this.color[k] = red;}
+                valid = true;
+                break;
+            }
+        }
+        if(valid){
+            for(let i = 0; i < this.nums.length; i++){
+                if(i != k){ this.selected[i] = false; this.color[i] = white; }
+            }
+        }
+        
+        this.traverseLock = false;
+    }
     
 
     this.draw = () => {
         for(let k = 0; k < this.nums.length; k++){
-            let circleCenter = this.radius*k*3+this.offset;
-            let lineStart = circleCenter+this.radius, lineEnd = circleCenter+this.radius+this.offset;
+            let lineStart = this.circleCenter[k]+this.radius, lineEnd = this.circleCenter[k]+this.radius+this.offset;
             p.strokeWeight(1);
             p.fill(this.color[k]);
-            p.circle(circleCenter, this.heightCenter, this.diameter);
+            p.circle(this.circleCenter[k], this.heightCenter, this.diameter);
             p.fill(black);
-            p.text(this.nums[k].toString(), circleCenter-this.radius/4, this.heightCenter+this.radius/5);
+            p.text(this.nums[k].toString(), this.circleCenter[k]-this.radius/4, this.heightCenter+this.radius/5);
+
+            if(k == this.nums.length - 1) continue;
 
             p.line(lineStart, this.heightCenter, lineEnd, this.heightCenter);
             p.strokeWeight(4);
@@ -133,14 +174,22 @@ function sketch(p) {
     p.setup = () => {
         init();
         let btnTraverse = p.createButton('Traverse'), btnReverse = p.createButton('Reverse');
+        let btnDelete = p.createButton('Delete');
         let canvas = document.getElementById("defaultCanvas0");
         let posy = canvas.offsetTop, posx = canvas.offsetLeft, offsetx = 50, offsety = 50, btnWidth=70;
-        btnTraverse.position(posx+offsetx, posy+offsety);
+        btnTraverse.position(posx+btnWidth*1*2, posy+offsety);
         btnTraverse.mousePressed(algo.traverse);
 
-        btnReverse.position(posx+offsetx*2+btnWidth, posy+offsety);
+        btnReverse.position(posx+btnWidth*2*2, posy+offsety);
         btnReverse.mousePressed(algo.reverse);
+
+        btnDelete.position(posx+btnWidth*3*2, posy+offsety);
+        btnDelete.mousePressed(algo.delete);
     };
+
+    p.mousePressed = () => {
+        algo.mousePressed();
+    }
     
     p.draw = () => {
         p.background(220);
