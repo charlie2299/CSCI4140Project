@@ -10,6 +10,7 @@ import QuickSort from './components/QuickSort';
 import ButtonCrontrols from './components/ButtonControls';
 import UserInputs from './components/UserInputs';
 import MergeSort from './components/MergeSort';
+import LinkedList from './components/LinkedList';
 
 const { SubMenu } = Menu;
 const { Title, Text } = Typography;
@@ -83,6 +84,12 @@ class App extends React.Component{
 							<Menu.Item key="11">option11</Menu.Item>
 							<Menu.Item key="12">option12</Menu.Item>
 						</SubMenu>
+						<SubMenu key="linkedlist" title="Linked List" onTitleClick={(e) => this.handleSubMenuSelected(e.key)}>
+							<Menu.Item key="constructList"><Link to="/construct-linked-list">Construction</Link></Menu.Item>
+							<Menu.Item key="14">option10</Menu.Item>
+							<Menu.Item key="11">option11</Menu.Item>
+							<Menu.Item key="12">option12</Menu.Item>
+						</SubMenu>
 						</Menu>
 					</Sider>
 					<Layout style={{ padding: '0 24px 24px' }}>
@@ -117,6 +124,9 @@ class App extends React.Component{
 									</Route>
 									<Route path="/mergesort">
 										<MergeSort></MergeSort>
+									</Route>
+									<Route path="/construct-linked-list">
+										<LinkedList></LinkedList>
 									</Route>
 									{/* <Route path="*">
 										<NoMatch></NoMatch>
