@@ -51,10 +51,13 @@ function AlgoQuickSort(nums, canvasWidth, canvasHeight, p){
         for(let i = left; i < right; i++) this.states[i] = 2;
 
         while(cur < r){
+            this.states[cur] = 1;
             if(this.nums[cur] < this.nums[r]){
                 await this.swap(cur, l++); 
             }
+            this.states[cur] = 2;
             cur++;
+            
         }
         await this.swap(l, r);
         this.states[r] = 0;
@@ -86,12 +89,19 @@ function sketch(p) {
     // declare objects
     let algo = undefined, canvas = undefined, nums = [];
 
-    let init = (numberOfElements) =>{
+    let init = (numberOfElements, inorder=false) =>{
         if(numberOfElements === undefined) numberOfElements = contextSettings.numberOfElements;
         canvas = new Canvas(canvasSize.width, canvasSize.height, numberOfElements);
         p.createCanvas(canvas.width, canvas.height);
         nums = [];
-        for(let i = 0; i < canvas.numberOfElements; i++) nums.push(p.random(canvas.height));
+        if(inorder){
+            let offset = canvas.height/canvas.numberOfElements;
+            for(let i = 0; i < canvas.numberOfElements; i++){
+                nums.push(canvas.height-i*offset);
+            }
+        }else{
+            for(let i = 0; i < canvas.numberOfElements; i++) {nums.push(p.random(canvas.height));}
+        }
         algo = new AlgoQuickSort(nums, canvas.width, canvas.height, p);
         algo.sort(0, nums.length-1);
         // initialize other variable members here...
@@ -101,8 +111,18 @@ function sketch(p) {
     let cc = new canvasController(p, init);  
     p.myCustomRedrawAccordingToNewPropsHandler = cc.propsHandler;
 
+    let handleWorstCase = () => {
+        init(contextSettings.numberOfElements, true);
+    }
+
     p.setup = () => {
-        init();
+        init(contextSettings.numberOfElements);
+        let canvas = document.getElementById("defaultCanvas0");
+        let posy = canvas.offsetTop, posx = canvas.offsetLeft, offsety = 50, btnWidth = 70;
+        let btnWorstCase = p.createButton('Worst Case');
+        btnWorstCase.position(posx+btnWidth*1*2, posy+offsety);
+        console.log(posx, btnWidth);
+        btnWorstCase.mousePressed(handleWorstCase);
     };
     
     p.draw = () => {
