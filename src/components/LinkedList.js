@@ -25,13 +25,14 @@ function AlgoLinkedList(nums, canvasWidth, canvasHeight, p){
     let numsOfElement = this.nums.length;
     for(let i = 0; i < numsOfElement-capacity+1; i++) {this.nums.pop();};
 
-    this.color = []; this.reversed = []; this.selected = []; this.circleCenter = []; this.hide = [];
+    this.color = []; this.selected = []; this.circleCenter = []; this.hide = [];
+
+    this.reversed = []; for(let i = 0; i < this.nums.length; i++) this.reversed.push(false);
 
     this.reset = () => {
-        this.color = []; this.reversed = []; this.selected = []; this.circleCenter = []; this.hide = [];
+        this.color = []; this.selected = []; this.circleCenter = []; this.hide = [];
         for(let i = 0; i < this.nums.length; i++) {
             this.color.push(white);
-            this.reversed.push(false);
             this.hide.push(false);
             this.selected.push(false);
             this.circleCenter.push(this.radius*i*3+this.offset);
