@@ -37,9 +37,9 @@ function sketch (p) {
     count=0;
     let a = (p.mouseX / p.width) * 90;
     theta = p.radians(a);
-    p.translate(p.width/2,p.height);
-    p.line(0,0,0,-250);
-    p.translate(0,-250);
+    p.translate(p.width/2,0);
+    p.line(0,0,0,250);
+    p.translate(0,250);
     p.branch(length,count);
     
   };
@@ -56,7 +56,11 @@ function sketch (p) {
     count++;
     if (h > 2) {
         p.push();    // Save the current state of transformation (i.e. where are we now)
-        p.rotate(theta);  // Rotate by theta
+        if(theta<1.57079633 && theta >0.1)
+          p.rotate(theta);  // Rotate by theta
+        else if (theta>1.57079633)
+          p.rotate(1.57079633);
+
         p.stroke(0,255,0);
         if(length<100)
           ratio=2.5;
@@ -64,33 +68,36 @@ function sketch (p) {
           ratio=1.5;
         else
           ratio=1;
-        p.line(0, 0, 0, -h*ratio);  // Draw the branch
+        p.line(0, 0, 0, h*ratio);  // Draw the branch
         if(interchange>0)
         {
           p.stroke(0,0,0);
           p.circle(0, 0, 3);
         }
-        p.translate(0, -h*ratio); // Move to the end of the branch
+        p.translate(0, h*ratio); // Move to the end of the branch
         p.branch(h,count);       // Ok, now call myself to draw two new branches!!
         p.pop();     // Whenever we get back here, we "pop" in order to restore the previous matrix state
     
         // Repeat the same thing, only branch off to the "left" this time!
         p.push();
         p.stroke(255,0,255);
-        p.rotate(-theta);
+        if(theta<1.57079633 && theta >0.1)
+          p.rotate(-theta); 
+        else if (theta>1.57079633)
+          p.rotate(-1.57079633); // Rotate by theta
         if(length<100)
           ratio=2.5;
         else if(count<2 || h<3)
           ratio=1.5;
         else
           ratio=1;
-        p.line(0, 0, 0, -h*ratio);  // Draw the branch
+        p.line(0, 0, 0, h*ratio);  // Draw the branch
         if(interchange>0)
         {
           p.stroke(0,0,0);
           p.circle(0, 0, 3);
         }
-        p.translate(0, -h*ratio); // Move to the end of the branch
+        p.translate(0, h*ratio); // Move to the end of the branch
         p.branch(h,count);
         p.pop();
       }

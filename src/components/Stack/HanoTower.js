@@ -4,7 +4,7 @@ import P5Wrapper from 'react-p5-wrapper';
 
 function sketch (p) {
 
-  var first=5;
+  var first=3;
   var second=0;
   var third=0;
   var poped=0;
@@ -22,6 +22,10 @@ function sketch (p) {
   p.setup = function () {
     p.createCanvas(1050, 800, p.WEBGL);
     p.frameRate(30);
+
+    //Document.getelementbyid()
+    //element.offsetTop
+    //element.offsetLeft
 
     for(var i =1;i<=15;i++)
     {
@@ -79,7 +83,7 @@ function sketch (p) {
       p.directionalLight(5*(i+1), 0*(i+1), 5*(i+1),-dirX,0,-2);
       p.translate(0, -60, 0);
       p.specularMaterial(first_stack[0][i]);
-      p.cylinder(first_stack[1][i], 60,70);
+      p.cylinder(first_stack[1][i], 100,70);
     }
     p.pop();
 
@@ -91,7 +95,7 @@ function sketch (p) {
       p.directionalLight(0, 5*(i+1), 5*(i+1),0,dirY,-2);
       p.translate(0, -40, 0);
       p.specularMaterial(second_stack[0][i]);
-      p.cylinder(second_stack[1][i], 60,70);
+      p.cylinder(second_stack[1][i], 100,70);
     }
     p.pop();
 
@@ -102,17 +106,17 @@ function sketch (p) {
       p.directionalLight(5*(i+1), 5*(i+1), 0,dirX,0,-2);
       p.translate(0, -40, 0);
       p.specularMaterial(third_stack[0][i]);
-      p.cylinder(third_stack[1][i], 60,70);
+      p.cylinder(third_stack[1][i], 100,70);
     }
     p.pop();
 
     p.push();
-    p.translate(-0, -400, -200);
+    p.translate(-0, -350, -150);
     for(i=0;i<poped;i++)
     {
       p.directionalLight(10, 10, 10,0,0,-2);
       p.specularMaterial(empty[0][0]);
-      p.cylinder(empty[1][0], 40,70);
+      p.cylinder(empty[1][0], 50,70);
     }
     p.pop();
 

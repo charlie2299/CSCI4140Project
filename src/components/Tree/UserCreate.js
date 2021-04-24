@@ -2,8 +2,64 @@ import React from 'react';
 import p5 from 'p5';
 import P5Wrapper from 'react-p5-wrapper';
 
-function sketch (p) {
 
+function sketch (p) {
+  class Node
+  {
+      constructor(data)
+      {
+          this.data = data;
+          this.left = null;
+          this.right = null;
+      }
+  }
+  class BinarySearchTree
+  {
+    constructor()
+    {
+        this.root = null;
+    }
+    getRootNode()
+    {
+        return this.root;
+    }
+    insert(data)
+    { 
+        var newNode = new Node(data);
+                          
+        if(this.root === null)
+            this.root = newNode;
+        else
+            this.insertNode(this.root, newNode);
+    }
+    insertNode(node, newNode)
+    {
+      if(newNode.data < node.data)
+      {
+  
+          if(node.left === null)
+              node.left = newNode;
+          else
+              this.insertNode(node.left, newNode); 
+      }
+      else
+      {
+          if(node.right === null)
+              node.right = newNode;
+          else
+              this.insertNode(node.right,newNode);
+      }
+    }
+    inorder(node)
+    {
+      if(node !== null)
+      {
+          this.inorder(node.left);
+          p.line(0,0,0,250);
+          this.inorder(node.right);
+      }
+    }
+  }
     var stored=[''];
     let theta;
     var left=0;
@@ -32,14 +88,19 @@ function sketch (p) {
 
     let a = (p.mouseX / p.width) * 90;
     theta = p.radians(a);
-    p.translate(p.width/2,p.height);
-    p.line(0,0,0,-250);
-    p.translate(0,-250);
+    p.translate(p.width/2,0);
+    p.line(0,0,0,250);
+    p.translate(0,250);
     p.branch(100,left,right);    
     
   };
 
   p.doubleClicked= function () {
+    var tree = new BinarySearchTree();
+    var root = tree.getRootNode();
+    tree.insert(0);
+    tree.inorder(root);
+
     if(p.isLooping())
       p.noLoop();
     else
