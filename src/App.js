@@ -2,8 +2,18 @@ import React from 'react';
 import { Layout, Menu, Breadcrumb, Typography, Row, Col } from 'antd';
 import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
 import 'antd/dist/antd.css';
-
 import { context, contextSettings as settings } from './Context';
+
+import Tower from './components/Stack/HanoTower';
+import Stack from './components/Stack/Stack';
+import ArrayStack from './components/Stack/ArrayS';
+import ListStack from './components//Stack/ListS';
+
+import BalancedBinaryTree from './components/Tree/BalancedBinaryTree';
+import UnbalancedBinaryTree from './components/Tree/UnbalancedBinaryTree';
+import BinarySreachTree from './components/Tree/BinarySreachTree';
+import UserTree from './components/Tree/UserCreate';
+
 import SpeedSlider from './components/SpeedSlider';
 import BubbleSort from './components/BubbleSort';
 import QuickSort from './components/QuickSort';
@@ -48,6 +58,7 @@ class App extends React.Component{
   render(){
   return (
     <Router>
+
 			<Layout>
 				<Header className="header">
 					<div className="logo" />
@@ -72,18 +83,18 @@ class App extends React.Component{
 							{/* <Menu.Item key="3"><Link to="/mergesort">Merge Sort</Link></Menu.Item>
 							<Menu.Item key="4"><Link to="/">??Sort</Link></Menu.Item> */}
 						</SubMenu>
-						<SubMenu key="sub2" title="subnav 2" onTitleClick={(e) => this.handleSubMenuSelected(e.key)}>
-							<Menu.Item key="5">option5</Menu.Item>
-							<Menu.Item key="6">option6</Menu.Item>
-							<Menu.Item key="7">option7</Menu.Item>
-							<Menu.Item key="8">option8</Menu.Item>
-						</SubMenu>
-						<SubMenu key="sub3" title="subnav 3" onTitleClick={(e) => this.handleSubMenuSelected(e.key)}>
-							<Menu.Item key="9">option9</Menu.Item>
-							<Menu.Item key="10">option10</Menu.Item>
-							<Menu.Item key="11">option11</Menu.Item>
-							<Menu.Item key="12">option12</Menu.Item>
-						</SubMenu>
+            <SubMenu key="sub2" title="Stack" onTitleClick={(e) => this.handleSubMenuSelected(e.key)}>
+                <Menu.Item key="5"><Link to="/tower">Hano Tower</Link></Menu.Item>
+                <Menu.Item key="6"><Link to="/noraml">Noraml Stack</Link></Menu.Item>
+                <Menu.Item key="7"><Link to="/arrayStack">Array Implementation</Link></Menu.Item>
+                <Menu.Item key="8"><Link to="/listStack">Linked List Implementation</Link></Menu.Item>
+            </SubMenu>
+            <SubMenu key="sub3" title="Binary Tree" onTitleClick={(e) => this.handleSubMenuSelected(e.key)}>
+                <Menu.Item key="9"><Link to="/binaryTree">Balanced Tree</Link></Menu.Item>
+                <Menu.Item key="10"><Link to="/unbalancedBinaryTree">Unbalanced Tree</Link></Menu.Item>
+                <Menu.Item key="11"><Link to="/binarySearchTree">Binary Search Tree</Link></Menu.Item>
+                <Menu.Item key="12"><Link to="/createTree">Try it yourself</Link></Menu.Item>
+            </SubMenu>
 						<SubMenu key="linkedlist" title="Linked List" onTitleClick={(e) => this.handleSubMenuSelected(e.key)}>
 							<Menu.Item key="constructList"><Link to="/construct-linked-list">Basic</Link></Menu.Item>
 							{/* <Menu.Item key="14">option10</Menu.Item>
@@ -122,6 +133,30 @@ class App extends React.Component{
 									<Route path="/quicksort">
 										<QuickSort />
 									</Route>
+                  <Route path="/tower">
+                      <Tower></Tower>
+                  </Route>
+                  <Route path="/noraml">
+                      <Stack></Stack>
+                  </Route>
+                  <Route path="/arrayStack">
+                      <ArrayStack></ArrayStack>
+                  </Route>
+                  <Route path="/listStack">
+                      <ListStack></ListStack>
+                  </Route>
+                  <Route path="/binaryTree">
+                      <BalancedBinaryTree></BalancedBinaryTree>
+                  </Route>
+                  <Route path="/unbalancedBinaryTree">
+                      <UnbalancedBinaryTree></UnbalancedBinaryTree>
+                  </Route>
+                  <Route path="/binarySearchTree">
+                      <BinarySreachTree></BinarySreachTree>
+                  </Route>
+                  <Route path="/createTree">
+                      <UserTree></UserTree>
+                  </Route>
 									{/* <Route path="/mergesort">
 										<MergeSort></MergeSort>
 									</Route> */}
