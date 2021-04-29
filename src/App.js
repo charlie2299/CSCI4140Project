@@ -89,16 +89,16 @@ class App extends React.Component{
 							{/* <Menu.Item key="3"><Link to="/mergesort">Merge Sort</Link></Menu.Item>
 							<Menu.Item key="4"><Link to="/">??Sort</Link></Menu.Item> */}
 						</SubMenu>
-						<SubMenu key="sub2" title="Stack" onTitleClick={(e) => this.handleSubMenuSelected(e.key)}>
-							<Menu.Item key="5"><Link to="/tower">Hano Tower</Link></Menu.Item>
-							<Menu.Item key="6"><Link to="/noraml">Noraml Stack</Link></Menu.Item>
-							<Menu.Item key="7"><Link to="/arrayStack">Array Implementation</Link></Menu.Item>
-							<Menu.Item key="8"><Link to="/listStack">Linked List Implementation</Link></Menu.Item>
+						<SubMenu key="Stack" title="Stack" onTitleClick={(e) => this.handleSubMenuSelected(e.key)}>
+							<Menu.Item key="tower"><Link to="/tower">Hano Tower</Link></Menu.Item>
+							<Menu.Item key="noraml"><Link to="/noraml">Noraml Stack</Link></Menu.Item>
+							<Menu.Item key="arrayStack"><Link to="/arrayStack">Array Implementation</Link></Menu.Item>
+							<Menu.Item key="listStack"><Link to="/listStack">Linked List Implementation</Link></Menu.Item>
 						</SubMenu>
-						<SubMenu key="sub3" title="Binary Tree" onTitleClick={(e) => this.handleSubMenuSelected(e.key)}>
-							<Menu.Item key="9"><Link to="/binaryTree">Balanced Tree</Link></Menu.Item>
-							<Menu.Item key="10"><Link to="/unbalancedBinaryTree">Unbalanced Tree</Link></Menu.Item>
-							<Menu.Item key="11"><Link to="/binarySearchTree">Binary Search Tree</Link></Menu.Item>
+						<SubMenu key="Tree" title="Binary Tree" onTitleClick={(e) => this.handleSubMenuSelected(e.key)}>
+							<Menu.Item key="binaryTree"><Link to="/binaryTree">Balanced Tree</Link></Menu.Item>
+							<Menu.Item key="unbalancedBinaryTree"><Link to="/unbalancedBinaryTree">Unbalanced Tree</Link></Menu.Item>
+							<Menu.Item key="binarySearchTree"><Link to="/binarySearchTree">Binary Search Tree</Link></Menu.Item>
 							{/* <Menu.Item key="12"><Link to="/createTree">Try it yourself</Link></Menu.Item> */}
 						</SubMenu>
 						<SubMenu key="linkedlist" title="Linked List" onTitleClick={(e) => this.handleSubMenuSelected(e.key)}>
