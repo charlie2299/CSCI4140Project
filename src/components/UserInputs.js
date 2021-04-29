@@ -18,7 +18,7 @@ class UserInputs extends React.Component{
                             onChange={(value) => this.props.handleNumberofElements(value)}
                         >
                         </InputNumber>
-                        <Title level={5} style={{margin: 0}}>(Sorting/LinkedList)</Title>
+                        {/* <Title level={5} style={{margin: 0}}>(Sorting/LinkedList)</Title> */}
                     </Space>
                 </Col>
             </Row>

@@ -37,8 +37,14 @@ class App extends React.Component{
 			subMenuTitle: "",
 			menuItemTitle: "",
 			contextSettings: settings,
+			stackAndTreeRoutes: ['tower', 'noraml', 'arrayStack', 'listStack',
+								 'binaryTree', 'unbalancedBinaryTree', 'binarySearchTree']
 		};
 	}
+
+	// componentDidMount(){
+	// 	console.log(window.location.href.split('/').slice(-1)[0]);
+	// }
 
 	handleFrameRateChange = (rate) => {this.setState({contextSettings: { ...this.state.contextSettings, frameRate: rate}});}
 	handleRestart = () => { this.setState({contextSettings:{...this.state.contextSettings, restart: true}}, () => this.setState({contextSettings:{...this.state.contextSettings, restart: false}})); }
@@ -93,7 +99,7 @@ class App extends React.Component{
 							<Menu.Item key="9"><Link to="/binaryTree">Balanced Tree</Link></Menu.Item>
 							<Menu.Item key="10"><Link to="/unbalancedBinaryTree">Unbalanced Tree</Link></Menu.Item>
 							<Menu.Item key="11"><Link to="/binarySearchTree">Binary Search Tree</Link></Menu.Item>
-							<Menu.Item key="12"><Link to="/createTree">Try it yourself</Link></Menu.Item>
+							{/* <Menu.Item key="12"><Link to="/createTree">Try it yourself</Link></Menu.Item> */}
 						</SubMenu>
 						<SubMenu key="linkedlist" title="Linked List" onTitleClick={(e) => this.handleSubMenuSelected(e.key)}>
 							<Menu.Item key="constructList"><Link to="/construct-linked-list">Basic</Link></Menu.Item>
@@ -112,7 +118,10 @@ class App extends React.Component{
 
 						<Content style={{ padding: '0 50px', margin: '16px 0'}}>
 							<context.Provider value={this.state.contextSettings}>
-								<div style={{paddingBottom: '20px'}}>
+								{
+									this.state.stackAndTreeRoutes.includes(window.location.href.split('/').slice(-1)[0]) ? 
+									<div></div> :
+									<div style={{paddingBottom: '20px'}}>
 									<SpeedSlider handleFrameRateChange={this.handleFrameRateChange}></SpeedSlider>
 									<ButtonCrontrols
 										handleStop={this.handleStop}
@@ -125,7 +134,10 @@ class App extends React.Component{
 										handleNumberofElements={this.handleNumberofElements}
 									>
 									</UserInputs>
-								</div>
+									</div>
+									
+								}
+								
 								<Switch>
 									<Route path="/bubblesort">
 										<BubbleSort />

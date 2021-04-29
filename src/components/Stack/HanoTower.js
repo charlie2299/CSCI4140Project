@@ -1,8 +1,11 @@
 import React from 'react';
 import p5 from 'p5';
 import P5Wrapper from 'react-p5-wrapper';
+import Canvas from '../Canvas';
+import { context, canvasSize, contextSettings } from '../../Context';
 
 function sketch (p) {
+  var canvas = undefined;
 
   var first=3;
   var second=0;
@@ -20,6 +23,7 @@ function sketch (p) {
   var err;
   
   p.setup = function () {
+
     p.createCanvas(1050, 800, p.WEBGL);
     p.frameRate(30);
 
@@ -225,10 +229,14 @@ function sketch (p) {
   }
 };
 
-export default class Canvas extends React.Component{
+class HanoTower extends React.Component{
   render(){
     return(
       <P5Wrapper sketch={sketch}></P5Wrapper>
     );
   }
 }
+
+HanoTower.contextType = context;
+
+export default HanoTower;
