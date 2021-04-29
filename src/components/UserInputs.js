@@ -2,7 +2,7 @@ import React from 'react';
 import { contextSettings } from '../Context';
 import { Row, Col, InputNumber, Typography, Space} from 'antd';
 
-const { Link, Title } = Typography;
+const { Link, Title, Text } = Typography;
 
 class UserInputs extends React.Component{
     render(){
@@ -18,6 +18,7 @@ class UserInputs extends React.Component{
                             onChange={(value) => this.props.handleNumberofElements(value)}
                         >
                         </InputNumber>
+                        <Title level={5} style={{margin: 0}}>(Sorting/LinkedList)</Title>
                     </Space>
                 </Col>
             </Row>
