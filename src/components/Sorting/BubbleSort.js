@@ -1,7 +1,7 @@
 import React from 'react';
 import P5Wrapper from 'react-p5-wrapper';
-import { context, canvasSize, contextSettings } from '../Context';
-import canvasController from "./canvasController";
+import { context, canvasSize, contextSettings } from '../../Context';
+import canvasController from "../canvasController";
 
 function sketch (p) {
   let values = [];

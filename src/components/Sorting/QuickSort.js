@@ -1,8 +1,8 @@
 import React from 'react';
 import P5Wrapper from 'react-p5-wrapper';
-import { context, canvasSize, contextSettings } from '../Context';
-import canvasController from "./canvasController";
-import Canvas from './Canvas';
+import { context, canvasSize, contextSettings } from '../../Context';
+import canvasController from "../canvasController";
+import Canvas from '../Canvas';
 
 function AlgoQuickSort(nums, canvasWidth, canvasHeight, p){
     
