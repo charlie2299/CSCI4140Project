@@ -47,7 +47,6 @@ function sketch (p) {
           if(node.left === null)
           {
             node.left = newNode;
-            p.input.value(newNode.data +"left"+ node.data)
           }
               
           else
@@ -58,7 +57,6 @@ function sketch (p) {
           if(node.right === null)
           {
             node.right = newNode;
-            p.input.value(newNode.data +"right"+  node.data)
           }
               
           else
