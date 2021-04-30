@@ -38,7 +38,7 @@ class App extends React.Component{
 			menuItemTitle: "",
 			contextSettings: settings,
 			stackAndTreeRoutes: ['tower', 'noraml', 'arrayStack', 'listStack',
-								 'binaryTree', 'unbalancedBinaryTree', 'binarySearchTree']
+								 'binaryTree', 'unbalancedBinaryTree', 'binarySearchTree','createTree']
 		};
 	}
 
@@ -99,6 +99,7 @@ class App extends React.Component{
 							<Menu.Item key="binaryTree"><Link to="/binaryTree">Balanced Tree</Link></Menu.Item>
 							<Menu.Item key="unbalancedBinaryTree"><Link to="/unbalancedBinaryTree">Unbalanced Tree</Link></Menu.Item>
 							<Menu.Item key="binarySearchTree"><Link to="/binarySearchTree">Binary Search Tree</Link></Menu.Item>
+							<Menu.Item key="createTree"><Link to="/createTree">Create BST</Link></Menu.Item>
 							{/* <Menu.Item key="12"><Link to="/createTree">Try it yourself</Link></Menu.Item> */}
 						</SubMenu>
 						<SubMenu key="linkedlist" title="Linked List" onTitleClick={(e) => this.handleSubMenuSelected(e.key)}>

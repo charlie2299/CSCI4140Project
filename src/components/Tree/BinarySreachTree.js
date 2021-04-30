@@ -55,9 +55,9 @@ function sketch (p) {
     h *= 0.666;
     count++;
     if (h > 2) {
-        p.push();    // Save the current state of transformation (i.e. where are we now)
+        p.push();   
         if(theta<1.57079633 && theta >0.1)
-          p.rotate(theta);  // Rotate by theta
+          p.rotate(theta);  
         else if (theta>1.57079633)
           p.rotate(1.57079633);
 
@@ -68,36 +68,36 @@ function sketch (p) {
           ratio=1.5;
         else
           ratio=1;
-        p.line(0, 0, 0, h*ratio);  // Draw the branch
+        p.line(0, 0, 0, h*ratio);  
         if(interchange>0)
         {
           p.stroke(0,0,0);
           p.circle(0, 0, 3);
         }
-        p.translate(0, h*ratio); // Move to the end of the branch
-        p.branch(h,count);       // Ok, now call myself to draw two new branches!!
-        p.pop();     // Whenever we get back here, we "pop" in order to restore the previous matrix state
+        p.translate(0, h*ratio); 
+        p.branch(h,count);       
+        p.pop();     
     
-        // Repeat the same thing, only branch off to the "left" this time!
+        
         p.push();
         p.stroke(255,0,255);
         if(theta<1.57079633 && theta >0.1)
           p.rotate(-theta); 
         else if (theta>1.57079633)
-          p.rotate(-1.57079633); // Rotate by theta
+          p.rotate(-1.57079633); 
         if(length<100)
           ratio=2.5;
         else if(count<2 || h<3)
           ratio=1.5;
         else
           ratio=1;
-        p.line(0, 0, 0, h*ratio);  // Draw the branch
+        p.line(0, 0, 0, h*ratio);  
         if(interchange>0)
         {
           p.stroke(0,0,0);
           p.circle(0, 0, 3);
         }
-        p.translate(0, h*ratio); // Move to the end of the branch
+        p.translate(0, h*ratio); 
         p.branch(h,count);
         p.pop();
       }
