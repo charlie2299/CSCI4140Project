@@ -81,7 +81,9 @@ function sketch (p) {
     var ratio=1;
   
   p.setup = function () {
-    p.createP("You can adjust the angle between each branch by moving your mouse horizontally, you can also stop or resume the animation by double clicking the mouse.");
+    p.createP("Tips");
+    p.createP("1. Adjust the angle between each branch by moving your mouse horizontally");
+    p.createP("2. Stop or resume the animation by double clicking the mouse.");
   
     p.createCanvas(1200, 800);
     p.frameRate(30);
