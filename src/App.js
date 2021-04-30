@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Menu, Breadcrumb, Typography, Row, Col } from 'antd';
+import { Layout, Menu, Breadcrumb } from 'antd';
 import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
 import 'antd/dist/antd.css';
 import { context, contextSettings as settings } from './Context';
@@ -15,15 +15,13 @@ import BinarySreachTree from './components/Tree/BinarySreachTree';
 import UserTree from './components/Tree/UserCreate';
 
 import SpeedSlider from './components/SpeedSlider';
-import BubbleSort from './components/BubbleSort';
-import QuickSort from './components/QuickSort';
+import BubbleSort from './components/Sorting/BubbleSort';
+import QuickSort from './components/Sorting/QuickSort';
 import ButtonCrontrols from './components/ButtonControls';
 import UserInputs from './components/UserInputs';
-import MergeSort from './components/MergeSort';
-import LinkedList from './components/LinkedList';
+import LinkedList from './components/LinkedList/LinkedList';
 
 const { SubMenu } = Menu;
-const { Title, Text } = Typography;
 const { Header, Sider, Content } = Layout;
 
 
@@ -41,10 +39,6 @@ class App extends React.Component{
 								 'binaryTree', 'unbalancedBinaryTree', 'binarySearchTree','createTree']
 		};
 	}
-
-	// componentDidMount(){
-	// 	console.log(window.location.href.split('/').slice(-1)[0]);
-	// }
 
 	handleFrameRateChange = (rate) => {this.setState({contextSettings: { ...this.state.contextSettings, frameRate: rate}});}
 	handleRestart = () => { this.setState({contextSettings:{...this.state.contextSettings, restart: true}}, () => this.setState({contextSettings:{...this.state.contextSettings, restart: false}})); }
@@ -81,13 +75,10 @@ class App extends React.Component{
 						defaultOpenKeys={this.state.openKeys}
 						style={{ height: '100%', borderRight: 0 }}
 						onSelect={(e) => this.handleMenuItemSelected(e.key)}
-						// onOpenChange={(openKeys) => this.handleSubMenuSelected(openKeys)}
 						>
 						<SubMenu key="Sorting"  title="Sorting" onTitleClick={(e) => this.handleSubMenuSelected(e.key)}>
 							<Menu.Item key="bubblesort"><Link to="/bubblesort">Bubble Sort</Link></Menu.Item>
 							<Menu.Item key="quicksort"><Link to="/quicksort">Quick Sort</Link></Menu.Item>
-							{/* <Menu.Item key="3"><Link to="/mergesort">Merge Sort</Link></Menu.Item>
-							<Menu.Item key="4"><Link to="/">??Sort</Link></Menu.Item> */}
 						</SubMenu>
 						<SubMenu key="Stack" title="Stack" onTitleClick={(e) => this.handleSubMenuSelected(e.key)}>
 							<Menu.Item key="tower"><Link to="/tower">Hano Tower</Link></Menu.Item>
@@ -104,9 +95,6 @@ class App extends React.Component{
 						</SubMenu>
 						<SubMenu key="linkedlist" title="Linked List" onTitleClick={(e) => this.handleSubMenuSelected(e.key)}>
 							<Menu.Item key="constructList"><Link to="/construct-linked-list">Basic</Link></Menu.Item>
-							{/* <Menu.Item key="14">option10</Menu.Item>
-							<Menu.Item key="11">option11</Menu.Item>
-							<Menu.Item key="12">option12</Menu.Item> */}
 						</SubMenu>
 						</Menu>
 					</Sider>
@@ -140,6 +128,9 @@ class App extends React.Component{
 								}
 								
 								<Switch>
+									<Route exact path="/">
+										<BubbleSort />
+									</Route>
 									<Route path="/bubblesort">
 										<BubbleSort />
 									</Route>
@@ -170,9 +161,6 @@ class App extends React.Component{
 									<Route path="/createTree">
 										<UserTree></UserTree>
 									</Route>
-									{/* <Route path="/mergesort">
-										<MergeSort></MergeSort>
-									</Route> */}
 									<Route path="/construct-linked-list">
 										<LinkedList></LinkedList>
 									</Route>

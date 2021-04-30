@@ -1,8 +1,8 @@
 import React from 'react';
 import P5Wrapper from 'react-p5-wrapper';
-import { context, canvasSize, contextSettings } from '../Context';
-import canvasController from "./canvasController";
-import Canvas from './Canvas';
+import { context, canvasSize, contextSettings } from '../../Context';
+import canvasController from "../canvasController";
+import Canvas from '../Canvas';
 
 function AlgoQuickSort(nums, canvasWidth, canvasHeight, p){
     
@@ -46,9 +46,9 @@ function AlgoQuickSort(nums, canvasWidth, canvasHeight, p){
     }
 
     this.partition = async (l, r) => {
-        this.states[r] = 1; 
+        this.states[r-1] = 1; 
         let cur = l, left = l, right = r;
-        for(let i = left; i < right; i++) this.states[i] = 2;
+        for(let i = left; i < right-1; i++) this.states[i] = 2;
 
         while(cur < r){
             this.states[cur] = 1;
@@ -60,7 +60,6 @@ function AlgoQuickSort(nums, canvasWidth, canvasHeight, p){
             
         }
         await this.swap(l, r);
-        this.states[r] = 0;
         for(let i = left; i < right; i++) this.states[i] = 0;
         
         return l;
